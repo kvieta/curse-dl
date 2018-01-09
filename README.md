@@ -1,4 +1,6 @@
 # curse-dl
-bash scripts for downloading curse modpacks without bullshit
+bash scripts for downloading curse modpacks without rubbish
 
-with thanks to https://cursemeta.dries007.net/
+uses https://cursemeta.dries007.net/ to get mod urls
+
+usage: ./curse.sh modpack.zip OR ./curse.sh https:/curse/url/to/download.zip
