@@ -38,7 +38,6 @@ mkdir cursemods
 cd cursemods
 
 #bash is turing complete
-#mod_arr=( $(grep 'projectID\|fileID' ../manifest.json | sed '1~2 s/,//' | tr '\n' ' '| xargs | tr ',' '\n' | sed 's/projectID://g;s/fileID:/,/g;s/ //g') )
 mod_arr=( $(grep 'projectID\|fileID' ../manifest.json | sed '1~2 s/,//' | tr '\r' ' ' | tr ',' '\n' | xargs |sed 's/projectID://g;s/fileID:/,/g;s/ //g') )
 mod_arr_length=${#mod_arr[@]}
 
