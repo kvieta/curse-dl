@@ -16,7 +16,7 @@ function getmod {
 #  echo "debug: $0 $1 $2 $3"
   modurl=$(curl -A "kvieta-curse-dl" -s "https://cursemeta.dries007.net/$1/files.json" | sed 's/}/}\n/g' | grep "$2" | xargs | tr ',' '\n' | grep Download | sed 's/DownloadURL://')
 #  echo "debug: $modurl"
-  wget "$modurl"
+  wget -q --show-progress --no-clobber "$modurl"
 }
 
 cd "$XDIR"
@@ -32,3 +32,23 @@ for (( i=0; i<${mod_arr_length}+1; i++ ));
 done
 
 cd ..
+
+#merge curse mods with overrides
+mkdir minecraft
+
+if [ -d "overrides/mods" ]
+  then
+    mv overrides/mods minecraft/
+  else
+    mkdir minecraft/mods
+    echo "Modpack does not provide additional mods"
+fi
+if [ -d "overrides/config" ]
+  then
+    mv overrides/config minecraft/
+  else
+    echo "Modpack does not provide configs"
+fi
+mv "cursemods/*" "minecraft/mods/"
+
+#todo: option to write instance.cfg and copy into multimc instance dir
