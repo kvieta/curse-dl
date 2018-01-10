@@ -20,16 +20,13 @@ else
 fi
 
 xdir="$(echo $zip | sed 's/.zip//')"
-#echo "debug: zip=\"$zip\", xdir: \"$xdir\""
 
 
 unzip -q "$zip" -d "$xdir" && rm "$zip"
 
 #getmod $modid $fileid
 function getmod {
-#  echo "debug: 1: $1 2: $2"
   modurl=$(curl -A "kvieta-curse-dl" -s "https://cursemeta.dries007.net/$1/files.json" | sed 's/}/}\n/g' | grep "$2" | xargs | tr ',' '\n' | grep Download | sed 's/DownloadURL://')
-#  echo "debug: $modurl"
   wget -q --show-progress --no-clobber "$modurl"
 }
 
